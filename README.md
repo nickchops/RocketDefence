@@ -17,6 +17,9 @@ The project includes two versions of the main game code:
   below
 - mainCompete.lua has those effects added
 
+Edit resorces/app.icf and switch between versions by commenting/uncommenting
+the relevant lines.
+
 Rocket Defence was based on https://github.com/nickchops/QuickGameIn100Lines
 with some re-skinning and additional features
 
@@ -116,11 +119,13 @@ Press F5 or click the green triangular run button to test again.
 ## Put it on a phone!
 
 - Switch back to the Hub
-- From the "Platform" dropdown, pick "Windows Phone 8.1"
-- From the "Architecture" dropdown, pick "wp81-arm"
+- From the "Platform" dropdown, pick a phone platform
+  (e.g. "Windows Phone 8.1")
+- From the "Architecture" dropdown, pick ARM (e.g. "wp81-arm")
 - Under BUILD set both switches to "Release" (click them if needed)
-- Make sure a Windows Phone is attached and the screen on the phone is unlocked
-- Click the big green "Package, Install and Run" button at the top!
-- The game should run! If the phone doesn't start it automatically,
-  swipe left on the home screen and scroll down to "R" to find it.
+- Make sure the phone is attached and the screen on the phone is unlocked.
+- Click the big green "Package, Install (and Run)" button at the top!
+- The game should install/run! On Windows Phone, If the phone doesn't start
+  it automatically, swipe left on the home screen and scroll down to "R" to
+  find it.
 - Rotate the phone to check out the virtual resolution in action.

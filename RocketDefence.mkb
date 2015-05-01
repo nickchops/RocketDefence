@@ -34,7 +34,6 @@ assets
     # Base asset set used by both optimisation options
     [nonCompiled]
     (resources)
-    .
     
     # These are engine code that's never pre-compiled,
     # so must include source version
@@ -48,6 +47,7 @@ assets
     # Non-code assets go here. This assumes your assets are in these folders.
     # Add to and edit this if needed.
     fonts
+    graphics
     
     # List any of your own files that use require() rather than dofile() here.
     # Only dofile-included code gets precompiled.

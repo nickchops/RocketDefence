@@ -12,8 +12,8 @@ config =
         typeChecking = true,  -- Turn on dbg.xxx functions that Quick uses internally to check types in some engine functions
         traceGC = false,      -- Trace info on object garbage collection
 
-        makePrecompiledLua = false, -- Turn on precompilation of lua files
-        usePrecompiledLua = false,  -- Turn on use of precompiled lua files
+        makePrecompiledLua = true, -- Turn on precompilation of lua files
+        usePrecompiledLua = true,  -- Turn on use of precompiled lua files
         useConcatenatedLua = false, -- Turn on use of concatenated precompiled lua files
     }
 }

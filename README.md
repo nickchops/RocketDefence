@@ -3,6 +3,8 @@
 **Marmalade Quick**, an open source, Lua-based rapid 2D development engine
 that comes bundled with the Marmalade SDK.
 
+https://youtu.be/5xSIVPykQuw
+
 Quick uses **Lua**, an easy to use high level scripting language, but
 underneath it binds tightly to C++ using Marmalade and Cocos2d-x APIs for
 features and performance.

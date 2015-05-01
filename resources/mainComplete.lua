@@ -16,7 +16,7 @@ vr:applyToScene(director:getCurrentScene())
 director:getCurrentScene().isTouchable = false
 
 -- Sky and label setup --
-local sky = director:createSprite(0,0,"epic-sky.jpg")
+local sky = director:createSprite(0,0,"graphics/epic-sky.jpg")
 tween:from(sky, {alpha=0, time=1})
 setDefaultSize(sky, appWidth, appHeight)
 
@@ -56,7 +56,7 @@ function objHit(event)
                 
                 -- create explosion of rock pieces
                 for i=0,6 do
-                    local rock = director:createSprite({x=event.x, y=event.y, source="meteor.png", xAnchor=0.5, yAnchor=0.5})
+                    local rock = director:createSprite({x=event.x, y=event.y, source="graphics/meteor.png", xAnchor=0.5, yAnchor=0.5})
                     setDefaultSize(rock, math.random(80,200))
                     tween:to(rock, {xScale=0, yScale=0, alpha=0, x=event.x+math.random(-300,300), y=event.y+math.random(-100,400),
                             time=1, onComplete=destroyNode})
@@ -95,7 +95,7 @@ events.orientation()
 
 -- Drop a meteor on a timer
 function dropMeteor()
-    local meteor = director:createSprite({x=math.random(50,appWidth-50), y=objMaxY, source="meteor.png", xAnchor=0.5, yAnchor=0.5})
+    local meteor = director:createSprite({x=math.random(50,appWidth-50), y=objMaxY, source="graphics/meteor.png", xAnchor=0.5, yAnchor=0.5})
     setDefaultSize(meteor, 180)
     physics:addNode(meteor, {radius=60})
     meteor:addEventListener("collision", objHit)
@@ -113,7 +113,7 @@ function events:touch(event)
         local xVelocity = (x-appWidth/2)*2
         local yVelocity = y*2
         
-        local rocket = director:createSprite({x=appWidth/2, y=-50, source="rocket.png", xAnchor=0.5, color=color.red})
+        local rocket = director:createSprite({x=appWidth/2, y=-50, source="graphics/rocket.png", xAnchor=0.5, color=color.red})
         setDefaultSize(rocket, 100)
         rocket.rotation = math.deg(math.atan2(xVelocity, yVelocity))
         
@@ -125,7 +125,7 @@ function events:touch(event)
         table.insert(objs, rocket)
         
         -- create fire particles trailing from the rocket
-        rocket.tail = director:createParticles("Comet.plist")
+        rocket.tail = director:createParticles("graphics/Comet.plist")
         rocket.tail.sourcePos = { rocket.x, rocket.y }
     end
 end

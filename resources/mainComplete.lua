@@ -1,31 +1,35 @@
+director:startRendering()
 dofile("VirtualResolution.lua")
 dofile("NodeUtility.lua")
 
+--require("mobdebug").start()
+
 local appWidth = 640
 local appHeight = 960
-
-local nextMeteorTime = 2.5
-math.randomseed(os.time())
-local objRadius = 30
-local objs = {}
 
 -- Virtual resolution setup --
 vr = virtualResolution
 vr:initialise{userSpaceW=appWidth, userSpaceH=appHeight}
 vr:applyToScene(director:getCurrentScene())
-director:getCurrentScene().isTouchable = false
+
+-- Game globals
+local nextMeteorTime = 2.5
+local objRadius = 30
+local objs = {}
+math.randomseed(os.time())
 
 -- Sky and label setup --
-local sky = director:createSprite(0,0,"graphics/epic-sky.jpg")
-tween:from(sky, {alpha=0, time=1})
+local sky = director:createSprite({x=0,y=0,source="graphics/epic-sky.jpg"})
 setDefaultSize(sky, appWidth, appHeight)
+tween:from(sky, {alpha=0, time=1})
+
 
 -- Use the brightness shader filter on the sky
 sky.filter.name = "brightness"
 
 local score = 0
 local scoreBg = director:createRectangle({x=appWidth/2-70, y=appHeight-90, w=140, h=50, color=color.black, zOrder=1})
-local scoreLabel = director:createLabel({x=appWidth/2-60, y=appHeight-90, text = "SCORE: 0", color=color.white, zOrder=2, sCale=2, yScale=2})
+local scoreLabel = director:createLabel({x=appWidth/2-60, y=appHeight-90, text = "SCORE: 0", color=color.white, zOrder=2, xScale=2, yScale=2})
 
 function setScore(val)
     score = val
@@ -107,9 +111,8 @@ dropMeteor()
 
 -- Fire rocket towards touch point on touch
 function events:touch(event)
-    local x,y = vr:getUserPos(event.x,event.y)
-    
     if event.phase == "ended" then
+        local x,y = vr:getUserPos(event.x,event.y)
         local xVelocity = (x-appWidth/2)*2
         local yVelocity = y*2
         
@@ -117,7 +120,7 @@ function events:touch(event)
         setDefaultSize(rocket, 100)
         rocket.rotation = math.deg(math.atan2(xVelocity, yVelocity))
         
-        physics:addNode(rocket, {radius=60})
+        physics:addNode(rocket, {radius=50})
         rocket.physics:setLinearVelocity(xVelocity, yVelocity)
         
         rocket:addEventListener("collision", objHit)
@@ -153,6 +156,7 @@ function events:update()
                 obj.tail.sourcePos.x=obj.x
                 obj.tail.sourcePos.y=obj.y
             end
+
             i=i+1
         end
     end
@@ -162,5 +166,5 @@ function events:update()
         sky.filter.intensity = sky.filter.intensity - 0.01
     end
 end
-
+png
 system:addEventListener({"touch", "update", "orientation"}, events)

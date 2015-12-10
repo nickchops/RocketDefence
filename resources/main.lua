@@ -1,30 +1,34 @@
+director:startRendering()
 dofile("VirtualResolution.lua")
 dofile("NodeUtility.lua")
 
+--require("mobdebug").start()
+
 local appWidth = 640
 local appHeight = 960
-
-local nextMeteorTime = 2.5
-math.randomseed(os.time())
-local objRadius = 30
-local objs = {}
 
 -- Virtual resolution setup --
 vr = virtualResolution
 vr:initialise{userSpaceW=appWidth, userSpaceH=appHeight}
 vr:applyToScene(director:getCurrentScene())
---director:getCurrentScene().isTouchable = false
+
+-- Game globals
+local nextMeteorTime = 2.5
+local objRadius = 30
+local objs = {}
+math.randomseed(os.time())
 
 -- Sky and label setup --
-local sky = director:createSprite(0,0,"epic-sky.jpg")
-tween:from(sky, {alpha=0, time=1})
+local sky = director:createSprite({x=0,y=0,source="graphics/epic-sky.jpg"})
 setDefaultSize(sky, appWidth, appHeight)
+tween:from(sky, {alpha=0, time=1})
+
 
 --> TASK 1 <--
 
 local score = 0
 local scoreBg = director:createRectangle({x=appWidth/2-70, y=appHeight-90, w=140, h=50, color=color.black, zOrder=1})
-local scoreLabel = director:createLabel({x=appWidth/2-60, y=appHeight-90, text = "SCORE: 0", color=color.white, zOrder=2, sCale=2, yScale=2})
+local scoreLabel = director:createLabel({x=appWidth/2-60, y=appHeight-90, text = "SCORE: 0", color=color.white, zOrder=2, xScale=2, yScale=2})
 
 function setScore(val)
     score = val
@@ -53,7 +57,7 @@ function objHit(event)
                 
                 -- create explosion of rock pieces
                 for i=0,6 do
-                    local rock = director:createSprite({x=event.x, y=event.y, source="meteor.png", xAnchor=0.5, yAnchor=0.5})
+                    local rock = director:createSprite({x=event.x, y=event.y, source="graphics/meteor.png", xAnchor=0.5, yAnchor=0.5})
                     setDefaultSize(rock, math.random(80,200))
                     tween:to(rock, {xScale=0, yScale=0, alpha=0, x=event.x+math.random(-300,300), y=event.y+math.random(-100,400),
                             time=1, onComplete=destroyNode})
@@ -89,7 +93,7 @@ events.orientation()
 
 -- Drop a meteor on a timer
 function dropMeteor()
-    local meteor = director:createSprite({x=math.random(50,appWidth-50), y=objMaxY, source="meteor.png", xAnchor=0.5, yAnchor=0.5})
+    local meteor = director:createSprite({x=math.random(50,appWidth-50), y=objMaxY, source="graphics/meteor.png", xAnchor=0.5, yAnchor=0.5})
     setDefaultSize(meteor, 180)
     physics:addNode(meteor, {radius=60})
     meteor:addEventListener("collision", objHit)
@@ -101,17 +105,16 @@ dropMeteor()
 
 -- Fire rocket towards touch point on touch
 function events:touch(event)
-    local x,y = vr:getUserPos(event.x,event.y)
-    
     if event.phase == "ended" then
+        local x,y = vr:getUserPos(event.x,event.y)
         local xVelocity = (x-appWidth/2)*2
         local yVelocity = y*2
         
-        local rocket = director:createSprite({x=appWidth/2, y=-50, source="rocket.png", xAnchor=0.5, color=color.red})
+        local rocket = director:createSprite({x=appWidth/2, y=-50, source="graphics/rocket.png", xAnchor=0.5, color=color.red})
         setDefaultSize(rocket, 100)
         rocket.rotation = math.deg(math.atan2(xVelocity, yVelocity))
         
-        physics:addNode(rocket, {radius=60})
+        physics:addNode(rocket, {radius=50})
         rocket.physics:setLinearVelocity(xVelocity, yVelocity)
         
         rocket:addEventListener("collision", objHit)

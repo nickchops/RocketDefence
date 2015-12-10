@@ -3,6 +3,8 @@
 *.sw?
 **/build_temp/**
 **/resources-ram/**
+**/resources-concatenated/**
+**/resources-precompiled/**
 **/project_*
 development.icf
 iwtrace.txt
@@ -10,3 +12,5 @@ iwtrace.txt
 **/code-drop/**
 MiniDump.dmp
 *.bak
+mobdebug.lua
+mainCompleteDemo.lua

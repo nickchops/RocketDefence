@@ -27,8 +27,8 @@ tween:from(sky, {alpha=0, time=1})
 --> TASK 1 <--
 
 local score = 0
-local scoreBg = director:createRectangle({x=appWidth/2-70, y=appHeight-90, w=140, h=50, color=color.black, zOrder=1})
-local scoreLabel = director:createLabel({x=appWidth/2-60, y=appHeight-90, text = "SCORE: 0", color=color.white, zOrder=2, xScale=2, yScale=2})
+local scoreBg = director:createRectangle({x=appWidth/2-130, y=appHeight-90, w=260, h=50, color=color.black, zOrder=1})
+local scoreLabel = director:createLabel({x=appWidth/2-120, y=appHeight-90, text = "SCORE: 0", color=color.white, zOrder=2, xScale=2, yScale=2})
 
 function setScore(val)
     score = val

@@ -5,7 +5,7 @@ MemMgrMaxAllocWarning=0
 
 [QUICK]
 #use this for the pre-effects version
-mainFilename="main.lua"
+#mainFilename="main.lua"
 
 #use this for the finished version with effects added
-#mainFilename="mainComplete.lua"
+mainFilename="mainComplete.lua"

@@ -6,7 +6,7 @@ config =
 {
     debug =
     {
-        general = false,       -- Turn on general debugging - dbg.xxx functions are trimmed out if this is false
+        general = true,       -- Turn on general debugging - dbg.xxx functions are trimmed out if this is false
                               -- If general = false, the three features below are disabled...
         assertDialogs = true, -- Display dialog boxes when asserting - if false, asserts are console messages
         typeChecking = true,  -- Turn on dbg.xxx functions that Quick uses internally to check types in some engine functions
